@@ -1,0 +1,104 @@
+<!-- mobile_list.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>List of Mobile Devices</title>
+    <style>
+        h1{
+            text-align: center;
+            color: blueviolet;
+        }
+        table{
+            margin-top:5%;
+            width: 100%;
+            
+            padding: 10px;
+
+        }
+        .float-right{
+            float: right;
+
+        }
+        button {
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+        #search{
+            padding: 10px 20px;
+            font-size: 14px;
+        }
+        th{
+            text-align: left;
+            padding: 10px;
+        }
+        td{
+            padding: 10px;
+            size: 18px;
+        }
+        #searchInput {
+            width: 300px; 
+            height: 30px; 
+            background-color: beige;
+            
+        }
+
+    </style>
+
+
+</head>
+<body>
+    <h1>List of Mobile Devices</h1>
+    <a href="{% url 'add' %}" class="float-right">
+        <button type="button" class="btn btn-danger me-md">ADD</button>
+    </a>
+    
+    <form action="" method="post">
+        {%csrf_token%}
+        <input type="text" name="text" id="searchInput">
+        <button type="submit" id="search">search</button>
+        
+    </form>
+    
+
+        <div class="parent">
+        <table border=1px solid black;>
+        
+        <tr>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Price</th>
+            <th>Color</th>
+            <th>Details</th>
+            <th>Delete</th>
+            <th>Edit</th>
+        </tr>
+        {% for i in qs%}
+        <tr>
+           <td>{{i.brand}}</td>
+            <td>{{i.model}}</td>
+            <td>{{i.price}}</td>
+            <td>{{i.color}}</td>
+            <td><a href="{% url 'det' i.id %}">View</a></td>
+            <td><a href="{% url 'rem' i.id %}">delete</a></td>
+            <td><a href="{% url 'edit' i.id %}">update</a></td>
+        </tr>
+    
+        {%endfor%}
+    
+    </table>
+    </div>
+    
+    </body>
+    </html>
